@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'mysql'
 gem 'rails', '3.0.1'
 gem 'haml'
 gem 'nifty-generators'

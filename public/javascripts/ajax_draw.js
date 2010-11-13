@@ -26,7 +26,7 @@ function ready_handler() {
   start_timer();
 }
 function start_timer() {
-  timer = setInterval( update_canvas_from_remote, 300);
+  timer = setInterval( update_canvas_from_remote, 100);
 }
 
 function stop_timer() {
