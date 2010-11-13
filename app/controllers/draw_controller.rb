@@ -1,6 +1,7 @@
 class DrawController < ApplicationController
   def index
-    render :json => Draw.all.to_json
+    render :json => Draw.all.to_json if params["since"].nil?
+    render :json => Draw.since(Time.parse(params["since"])).to_json if params["since"]
   end
 
   def create

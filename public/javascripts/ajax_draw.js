@@ -3,6 +3,7 @@ var context;
 var active;
 var debug;
 var timer;
+var last_refresh;
 
 $(document).ready(ready_handler);
 
@@ -21,12 +22,12 @@ function ready_handler() {
   $('#ajax_draw_canvas').mousemove(ajax_draw_mouse_over);
   $('#clear_button').click(clear);
   $('#refresh_button').click(update_canvas_from_remote);
-  
+
   log("Startup Done");
   start_timer();
 }
 function start_timer() {
-  timer = setInterval( update_canvas_from_remote, 100);
+  timer = setInterval( update_canvas_from_remote, 500);
 }
 
 function stop_timer() {
@@ -44,7 +45,19 @@ function ajax_draw_mouse_up(e) {
 }
 
 function update_canvas_from_remote() {
-  $.getJSON('/draw', draw_from_json);
+  $.getJSON('/draw', 'since=' + last_refresh, draw_from_json);
+  last_refresh = get_current_date();
+}
+
+function get_current_date() {
+  currentTime = new Date();
+  month   = currentTime.getMonth() + 1;
+  day     = currentTime.getDate();
+  year    = currentTime.getFullYear();
+  hours   = currentTime.getHours();
+  minutes = currentTime.getMinutes();
+  seconds = currentTime.getSeconds();
+  return day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + 0;
 }
 
 function draw_from_json(data) {
