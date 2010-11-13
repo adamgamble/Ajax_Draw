@@ -21,7 +21,7 @@ function ready_handler() {
   $('#ajax_draw_canvas').mousemove(ajax_draw_mouse_over);
   $('#clear_button').click(clear);
   $('#refresh_button').click(update_canvas_from_remote);
-
+  
   log("Startup Done");
   start_timer();
 }
@@ -66,7 +66,7 @@ function ajax_draw_mouse_over(e) {
     position = $('#ajax_draw_canvas').position();
     x = e.pageX - position.left;
     y = e.pageY - position.top;
-    draw_point(x,y,'red');
+    draw_point(x,y,document.getElementById("color").value);
     $.ajax({
       type: 'POST',
       url: "/draw",
