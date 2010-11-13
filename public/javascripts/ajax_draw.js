@@ -12,7 +12,7 @@ function ready_handler() {
   canvas = document.getElementById("ajax_draw_canvas");
   debug = $('#debug')
   context = canvas.getContext("2d");
-  context.lineWidth = 5;
+  context.lineWidth = 2;
   context.lineCap = 'round';
   active = false;
 
@@ -27,7 +27,7 @@ function ready_handler() {
   start_timer();
 }
 function start_timer() {
-  timer = setInterval( update_canvas_from_remote, 500);
+  timer = setInterval( update_canvas_from_remote, 300);
 }
 
 function stop_timer() {
@@ -62,7 +62,7 @@ function get_current_date() {
 
 function draw_from_json(data) {
   $.each(data, function(index, value) {
-    draw_point(value.draw.x,value.draw.y,value.draw.color);
+    draw_point(value.x,value.y,value.color);
   });
 }
 
